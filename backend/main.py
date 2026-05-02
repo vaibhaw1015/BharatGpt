@@ -22,14 +22,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
-# Enable CORS for the frontend
+# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all for local dev
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Request Logger for Debugging
+@app.middleware("http")
+async def log_requests(request, call_next):
+    print(f"  [DEBUG] Incoming {request.method} request to {request.url.path}")
+    response = await call_next(request)
+    print(f"  [DEBUG] Response Status: {response.status_code}")
+    return response
 
 # Set up API Keys
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")

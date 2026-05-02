@@ -8,9 +8,8 @@ const removeImageBtn = document.getElementById('remove-image-btn');
 
 let currentImageBase64 = null;
 
-// Configure the backend API URL
-// We assume the FastAPI backend runs on localhost:8000
-const API_URL = '/api/chat';
+// Dynamic API URL that works both locally and on Render
+const API_URL = `${window.location.origin}/api/chat`;
 
 
 function addMessage(message, isUser = false, imageBase64 = null, modelName = null) {
@@ -134,7 +133,7 @@ async function handleSend() {
 
     } catch (error) {
         removeTypingIndicator();
-        addMessage('Network error. Could not connect to the backend server. Make sure the FastAPI server is running on localhost:8000.', false);
+        addMessage(`Network error: Could not connect to the Bharat GPT server. Please try again in a few seconds while the server wakes up. (Details: ${error.message})`, false);
         console.error('Fetch Error:', error);
     }
 }
