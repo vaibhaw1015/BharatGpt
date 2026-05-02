@@ -10,7 +10,8 @@ let currentImageBase64 = null;
 
 // Configure the backend API URL
 // We assume the FastAPI backend runs on localhost:8000
-const API_URL = '/chat';
+const API_URL = '/api/chat';
+
 
 function addMessage(message, isUser = false, imageBase64 = null, modelName = null) {
     const messageDiv = document.createElement('div');

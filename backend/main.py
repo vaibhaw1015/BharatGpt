@@ -151,7 +151,7 @@ async def chat_with_groq(query: str, image_base64: str = None):
     )
     return completion.choices[0].message.content
 
-@app.post("/chat", response_model=QueryResponse)
+@app.post("/api/chat", response_model=QueryResponse)
 async def chat_handler(request: QueryRequest):
     errors = []
     
@@ -179,8 +179,14 @@ async def chat_handler(request: QueryRequest):
     error_summary = " | ".join(errors) if errors else "No AI models configured. Please check your .env file."
     return QueryResponse(answer=f"Bharat GPT Error: {error_summary}", model_used="None")
 
-# Mount static files (css, js, images)
-# The "html=True" flag automatically serves index.html at the root (/)
+# Diagnostic: Print paths to logs during startup
+print(f"--- Production Path Audit ---")
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"FRONTEND_DIR: {FRONTEND_DIR}")
+print(f"Index exists: {os.path.exists(os.path.join(FRONTEND_DIR, 'index.html'))}")
+print(f"-----------------------------")
+
+# Mount static files (css, js, images) last
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 if __name__ == "__main__":
