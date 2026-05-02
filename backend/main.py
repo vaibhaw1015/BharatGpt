@@ -18,7 +18,7 @@ load_dotenv()
 app = FastAPI(title="Bharat GPT API", description="AI Assistant for Indian Agriculture")
 
 # Paths
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
@@ -182,7 +182,10 @@ async def chat_handler(request: QueryRequest):
 # Serve Frontend
 @app.get("/")
 async def serve_index():
-    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+    index_path = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"error": f"Frontend index.html not found at {index_path}"}
 
 # Mount other static files (css, js, images)
 app.mount("/", StaticFiles(directory=FRONTEND_DIR), name="frontend")
