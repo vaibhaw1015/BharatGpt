@@ -168,7 +168,7 @@ async def chat_handler(request: QueryRequest):
         try:
             print(f"  [CHAT] Attempting Gemini...")
             answer = await chat_with_gemini(request.query, request.image_base64)
-            return QueryResponse(answer=answer, model_used="Gemini 1.5 Flash")
+            return QueryResponse(answer=answer, model_used="Bharat GPT")
         except Exception as e:
             errors.append(f"Gemini error: {str(e)}")
             print(f"  [WARN] Gemini failed: {e}")
@@ -178,7 +178,7 @@ async def chat_handler(request: QueryRequest):
         try:
             print(f"  [CHAT] Attempting Groq fallback...")
             answer = await chat_with_groq(request.query, request.image_base64)
-            return QueryResponse(answer=answer, model_used="Groq (Llama 3)")
+            return QueryResponse(answer=answer, model_used="Bharat GPT")
         except Exception as e:
             errors.append(f"Groq error: {str(e)}")
             print(f"  [WARN] Groq failed: {e}")
