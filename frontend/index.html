@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat GPT - Agricultural Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <i class="fa-solid fa-leaf logo-icon"></i>
+                <h1 class="logo-text">Bharat<span class="highlight">GPT</span></h1>
+            </div>
+            <div class="sidebar-info">
+                <p>Welcome to Bharat GPT, your AI-powered agricultural assistant.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-seedling"></i> Crop Recommendation</li>
+                    <li><i class="fa-solid fa-cloud-sun-rain"></i> Climate & Weather</li>
+                    <li><i class="fa-solid fa-droplet"></i> Rainfall Analysis</li>
+                    <li><i class="fa-solid fa-mound"></i> Soil Types</li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <p>Data Source: Local DB + OpenAI</p>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <header class="chat-header">
+                <h2>Agricultural Assistant</h2>
+                <div class="status">
+                    <span class="dot"></span> Online
+                </div>
+            </header>
+            
+            <div class="chat-box" id="chat-box">
+                <!-- Welcome Message -->
+                <div class="message ai-message">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="content">
+                        <p>Namaste! I am Bharat GPT, ready to help you with insights on Indian crops, weather, soil, and cultivation. How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div id="image-preview-container" style="display: none;">
+                    <img id="image-preview" src="" alt="Preview">
+                    <button id="remove-image-btn"><i class="fa-solid fa-times"></i></button>
+                </div>
+                <div class="input-wrapper">
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                    <label for="image-upload" class="upload-btn" title="Upload Photo"><i class="fa-solid fa-camera"></i></label>
+                    <input type="text" id="user-input" placeholder="Ask about crop recommendations, soil types, or upload a photo...">
+                    <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
