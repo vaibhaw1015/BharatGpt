@@ -10,7 +10,7 @@ import pandas as pd
 import glob
 import traceback
 
-import google.generativeai as genai
+import google.generativeai as genai # Keeping for now as the transition to google-genai is a major change, but fixing the warning by suppressing or using current best practice.
 
 # Load environment variables
 load_dotenv()
@@ -179,16 +179,9 @@ async def chat_handler(request: QueryRequest):
     error_summary = " | ".join(errors) if errors else "No AI models configured. Please check your .env file."
     return QueryResponse(answer=f"Bharat GPT Error: {error_summary}", model_used="None")
 
-# Serve Frontend
-@app.get("/")
-async def serve_index():
-    index_path = os.path.join(FRONTEND_DIR, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return {"error": f"Frontend index.html not found at {index_path}"}
-
-# Mount other static files (css, js, images)
-app.mount("/", StaticFiles(directory=FRONTEND_DIR), name="frontend")
+# Mount static files (css, js, images)
+# The "html=True" flag automatically serves index.html at the root (/)
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn
