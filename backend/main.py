@@ -145,7 +145,7 @@ async def chat_with_groq(query: str, image_base64: str = None):
             {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_base64}"}}
         ]
     else:
-        model_to_use = "llama-3.3-70b-versatile"
+        model_to_use = "openai/gpt-oss-20b"
         user_content = query
 
     completion = groq_client.chat.completions.create(
